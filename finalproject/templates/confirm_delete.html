@@ -1,0 +1,15 @@
+<!-- confirm_delete.html -->
+
+{% extends "layout.html" %}
+
+{% block title %}
+    Confirm Delete
+{% endblock %}
+
+{% block main %}
+    <h2>Confirm Delete</h2>
+    <p>Are you sure you want to delete the partner: {{ partner_name }}?</p>
+    <form action="/delete/{{ partner_name }}" method="post">
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
+{% endblock %}

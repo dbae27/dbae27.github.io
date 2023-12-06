@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Partner
+{% endblock %}
+
+{% block main %}
+<body>
+
+    <script>
+        var img = new Image();
+        img.src = "https://media-cldnry.s-nbcnews.com/image/upload/newscms/2018_22/2447996/180529-asian-americans-for-peace-al-1548.jpg";
+        img.onload = function() {
+            document.body.style.backgroundImage = 'url(' + img.src + ')';
+            document.body.style.backgroundRepeat = 'no-repeat';
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var loginButton = document.getElementById("login-button");
+            var logoutButton = document.getElementById("logout-button");
+            var editButton = document.getElementById("edit-button");
+            var isLoggedIn = {{ session.get("user_id")|default("false")|tojson|safe }};
+
+            if (isLoggedIn) {
+                loginButton.style.display = "none";
+                logoutButton.style.display = "block";
+                editButton.style.display = "block";
+            } else {
+                loginButton.style.display = "block";
+                logoutButton.style.display = "none";
+                editButton.style.display = "none";
+            }
+        });
+    </script>
+    <div class="overlay-text">
+        <div class="center-block">
+            <h1 id="bold">About</h1>
+        </div>
+
+        <div class="center-block">
+            <h5>{{ about_text }}</h5>
+        </div>
+        <footer>&copy; 2023 Daniel Bae</footer>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Partner
+{% endblock %}
+
+{% block main %}
+    <form action="/add" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="website" class="form-label">Website:</label>
+            <input type="text" class="form-control" id="website" name="website" required>
+        </div>
+        <div class="mb-3">
+            <label for="School" class="form-label">School:</label>
+            <input type="text" class="form-control" id="School" name="School" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Partner</button>
+    </form>
+{% endblock %}

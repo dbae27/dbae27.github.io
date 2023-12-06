@@ -1,0 +1,34 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="overlay-text">
+        <div class="center-block">
+            <h1 id="bold">Edit Text</h1>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+        </nav>
+        <div class="center-block">
+            <form action="/edit-home" method="post">
+                <textarea name="new_text" rows="10" cols="50">{{ new_text }}</textarea>
+                <!-- Change the name attribute to "about_text" -->
+                <br>
+                <input type="submit" value="Save Changes">
+            </form>
+        </div>
+        <footer>&copy; 2023 Daniel Bae</footer>
+    </div>
+</body>
+
+</html>
