@@ -1,0 +1,53 @@
+/* Style-sheet used in all html pages. This sets the background */
+.overlay-text {
+    color: #fff; /* White text */
+    font-size: 20px;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better contrast */
+    }
+
+
+    /* footers are cursive  */
+    footer {
+        font-family: cursive;
+    }
+
+    /* bold font */
+    #bold {
+        font-weight: bold;
+    }
+    /* centers text, used in html */
+    .center-block {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    /* so images fill entire page */
+    #fill {
+        background-size: 100% 100%;
+        background-position: center;
+    }
+
+    .neutral-background {
+        background-
+        background-color: #f4f4f4; /* Choose your desired neutral color */
+        padding: 20px; /* Adjust as needed */
+    }
+
+    .navbar {
+        background-color: #000 !important; /* Set background color to black */
+    }
+    
+    .centered-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 400px;
+        height: 400px;
+        object-fit: cover; /* This ensures the image maintains its aspect ratio while covering the specified dimensions */
+    }

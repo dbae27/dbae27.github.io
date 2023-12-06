@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Partner
+{% endblock %}
+
+{% block main %}
+<body>
+    <script>
+        var img = new Image();
+        img.src = "https://assets-global.website-files.com/642f43eda0b0a840e91fa217/6515c2bbeafb80d3da740f11_JPY_3549_v62UcYlQ.jpg";
+        img.onload = function() {
+            document.body.style.backgroundImage = 'url(' + img.src + ')';
+            document.body.style.backgroundRepeat = 'no-repeat';
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var loginButton = document.getElementById("login-button");
+            var logoutButton = document.getElementById("logout-button");
+            var isLoggedIn = {{ session.get("user_id")|default("false")|tojson|safe }};
+
+            if (isLoggedIn) {
+                loginButton.style.display = "none";
+                logoutButton.style.display = "block";
+            } else {
+                loginButton.style.display = "block";
+                logoutButton.style.display = "none";
+            }
+        });
+    </script>
+    <div class="overlay-text">
+        <div class="center-block">
+            <h1 id="bold">Contact</h1>
+        </div>
+        
+        <div class="center-block">
+            <h5>To learn more about the TAAF AAPI Youth Initiative, or to reach out regarding potential partnerships, please email below. We'd love to hear from you!<br><br>
+                <a href="mailto:dbae@college.harvard.edu">Email Us</a>
+            </h5>
+        </div>
+        <footer>&copy; 2023 Daniel Bae</footer>
+    </div>
+</body>
+{% endblock %}

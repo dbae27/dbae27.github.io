@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Partner
+{% endblock %}
+
+{% block main %}
+<style>
+    /* Add any custom styles here */
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .overlay-text {
+        position: relative;
+        color: white;
+        text-align: center;
+        padding: 100px 20px;
+    }
+
+    /* Add more styles as needed */
+</style>
+<body>
+    <script>
+        // Declare filterPartners and clearSearch globally
+        function filterPartners() {
+            var selectedSchool = document.getElementById("school-search");
+            var selectedSchoolValue = selectedSchool ? selectedSchool.value.toUpperCase(): "";
+
+            var partnerList = document.getElementById("partner-list").getElementsByTagName("li");
+
+            for (var i = 0; i < partnerList.length; i++) {
+                var partner = partnerList[i];
+                var partnerSchool = partner.dataset.school ? partner.dataset.school.toUpperCase() : "";
+
+                // Check if the selected school matches the partner's school or if nothing is selected
+                if (!selectedSchool || selectedSchoolValue === "" || selectedSchoolValue === partnerSchool) {
+                    partner.style.display = "";
+                } else {
+                    partner.style.display = "none";
+                }
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById("school-search").value = "";
+            filterPartners();
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Set background image after the DOM is fully loaded
+            var img = new Image();
+            img.src = "https://chronicle.brightspotcdn.com/c4/c2/ada175816e51a4c8bd490b867d4d/8harvardtrial-weekly.jpg";
+            img.onload = function () {
+                document.body.style.backgroundImage = 'url(' + img.src + ')';
+            }
+
+            // Rest of your JavaScript code...
+
+            // Hide/show buttons based on user login status
+            var loginButton = document.getElementById("login-button");
+            var logoutButton = document.getElementById("logout-button");
+            var addButton = document.getElementById("add-button");
+            var deleteButtons = document.getElementsByClassName("delete-button");
+            var isLoggedIn = {{ session.get("user_id")|default("false")|tojson|safe }};
+
+            if (isLoggedIn) {
+                loginButton.style.display = "none";
+                logoutButton.style.display = "block";
+                addButton.style.display = "block";
+                for (var i = 0; i < deleteButtons.length; i++) {
+                    deleteButtons[i].style.display = "block";
+                }
+            } else {
+                loginButton.style.display = "block";
+                logoutButton.style.display = "none";
+                addButton.style.display = "none";
+                for (var i = 0; i < deleteButtons.length; i++) {
+                    deleteButtons[i].style.display = "none";
+                }
+            }
+        });
+    </script>
+
+    <div class="overlay-text">
+        <div class="center-block">
+            <h1 id="bold">Partners</h1>
+        </div>
+
+        <div class="center-block">
+            <div class="dropdown">
+                <label for="school-search">Search by School:</label>
+                <div class="input-group">
+                    <select id="school-search" class="form-control" onchange="filterPartners()">
+                        <option value="">Select a school</option>
+                        {% for school in unique_schools %}
+                            <option value="{{ school }}">{{ school }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" onclick="clearSearch()">Clear</button>
+                    </div>
+                </div>
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Partner List</a>
+                <ul class="dropdown-menu" id="partner-list">
+                    {% for partner in partners %}
+                        <li data-school="{{ partner.School }}">
+                            <a class="dropdown-item" href="{{ partner.website }}">
+                                {{ partner.name }}
+                                {% if session.get("user_id") %}
+                                    <form action="/delete/{{ partner.name }}" method="post" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this partner?');">
+                                        <button class="btn btn-danger btn-sm delete-button" type="submit">Delete</button>
+                                    </form>
+                                {% endif %}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    {% if session.get("user_id") %}
+                    <a class = "dropdown-item" href = "/add" id="add-button" style="display: block;">Add</button>
+                    {% else %}
+                    <a class = "dropdown-item" href = "/add" id="add-button" style="display: none;">Add</button>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <footer id = light>&copy; 2023 Daniel Bae</footer>
+    </div>
+</body>
+{% endblock %}

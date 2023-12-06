@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Partner
+{% endblock %}
+
+{% block main %}
+<body>
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var loginButton = document.getElementById("login-button");
+            var logoutButton = document.getElementById("logout-button");
+            var editButton = document.getElementById("edit-button");
+            var isLoggedIn = {{ session.get("user_id")|default("false")|tojson|safe }};
+
+            if (isLoggedIn) {
+                loginButton.style.display = "none";
+                logoutButton.style.display = "block";
+                editButton.style.display = "block";
+            } else {
+                loginButton.style.display = "block";
+                logoutButton.style.display = "none";
+                editButton.style.display = "none";
+            }
+        });
+    </script>
+    <div class="overlay-text">
+        <div class="center-block">
+            <h1 id="bold">Events</h1>
+        </div>
+<div>
+        {% for event in events %}
+        <h3 class = center-block>{{ event.title }}</h3>
+        <p class = center-block>{{ event.description }}</p>
+
+        {% if event.image %}
+            <img src="{{ event.image }}" alt="{{ event.title }} Photo" class = centered-image>
+        {% else %}
+            <p>No photo available</p>
+        {% endif %}
+
+        {% if session.get("user_id") %}
+        <div class = center-block>
+            <form action="/delete_event/{{ event.id }}" method="post" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                <button class="btn btn-danger btn-sm delete-button" type="submit">Delete</button>
+            </form>
+        </div>
+        {% endif %}
+        <br>
+        <br>
+{% endfor %}
+</div>
+        <footer>&copy; 2023 Daniel Bae</footer>
+    </div>
+</body>
+{% endblock %}
