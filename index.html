@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Partner
+{% endblock %}
+
+{% block main %}
+    <script src="script.js"></script>
+    <script>
+        var img = new Image();
+        img.src = "https://static01.nyt.com/images/2018/10/15/us/15harvard2/15harvard2-superJumbo.jpg";
+        img.onload = function() {
+            document.body.style.backgroundImage = 'url(' + img.src + ')';
+            document.body.style.backgroundRepeat = 'no-repeat';
+        }
+    </script>
+    <div class="overlay-text">
+        <div class="center-block">
+            <h1 id="bold">TAAF Youth Initiative</h1>
+        </div>
+
+        <div class="center-block">
+            <h5>{{ home_text.text_content }}</h5>
+        </div>
+        <footer>&copy; 2023 Daniel Bae</footer>
+    </div>
+{% endblock %}
